@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>General Ledger</title>
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+</head>
+<body>
+	<div class="container">
+		<h3>Create Account</h3>
+		<form action="/ledger/addaccount" method="post">
+			<div class="form-group">
+				<label>Account Name:</label>
+				<input type="text" class="form-control" name="name" />
+			</div>
+			<div class="form-group">
+				<label>Account Number:</label>
+				<input type="text" class="form-control" name="number" />
+			</div>
+		    <div class="form-group">
+		        <label for="sel1">Account Type:</label>
+		        <select class="form-control" id="sel1" name="type">
+		            <option>CREDIT</option>
+		            <option>DEBIT</option>
+		        </select>
+		    </div>
+			<button type="submit" class="btn btn-default">Add</button>
+		</form>	
+	</div>
+</body>
+</html>

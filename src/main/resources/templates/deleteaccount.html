@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>General Ledger</title>
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+</head>
+<body>
+	<div class="container">
+		<h3>Delete Acccount</h3>
+		<form action="/ledger/deleteaccount" method="post">
+ 	   		<div class="form-group">
+		        <label for="sel1">Account:</label>
+		        <select class="form-control" id="sel1" name="id">
+		            <option th:each="account : ${ledgerAccounts}" th:text="${account.id}" />
+		        </select>
+		    </div>
+		    <button type="submit" class="btn btn-default">Delete</button>
+		</form>
+	</div>
+</body>
+</html>
