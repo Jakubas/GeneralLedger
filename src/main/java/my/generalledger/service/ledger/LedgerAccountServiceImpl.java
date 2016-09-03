@@ -1,11 +1,11 @@
-package my.generalledger.service;
+package my.generalledger.service.ledger;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import my.generalledger.dao.LedgerAccountDAO;
+import my.generalledger.dao.ledger.LedgerAccountDAO;
 import my.generalledger.domain.ledger.LedgerAccount;
 
 @Service

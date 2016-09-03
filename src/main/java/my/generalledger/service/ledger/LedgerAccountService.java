@@ -1,4 +1,4 @@
-package my.generalledger.service;
+package my.generalledger.service.ledger;
 
 import java.util.List;
 

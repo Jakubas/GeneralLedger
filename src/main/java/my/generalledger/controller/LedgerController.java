@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import my.generalledger.domain.ledger.LedgerAccount;
 import my.generalledger.domain.ledger.LedgerAccount.Type;
-import my.generalledger.service.LedgerAccountService;
+import my.generalledger.service.ledger.LedgerAccountService;
 
 @Controller
 public class LedgerController {

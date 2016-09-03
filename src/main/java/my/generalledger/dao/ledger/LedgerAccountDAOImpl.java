@@ -1,4 +1,4 @@
-package my.generalledger.dao;
+package my.generalledger.dao.ledger;
 
 import java.util.List;
 
