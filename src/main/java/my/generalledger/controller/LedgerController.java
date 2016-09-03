@@ -36,7 +36,6 @@ public class LedgerController {
 							       @RequestParam(value = "number") String number) {
 		LedgerAccount la = new LedgerAccount(name, type, number);
 		ledgerAccountService.saveAccount(la);
-		//TODO redirect fix
 		return "redirect:/ledger";
 	}
 	

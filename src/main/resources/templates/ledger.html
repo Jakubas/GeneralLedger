@@ -7,22 +7,17 @@
 <body>
 	<div class="container">
 		<h3>Accounts</h3>
-		<ul class="list-group">
-  			<li class="list-group-item" th:each="account : ${ledgerAccounts}" th:text="${account}" />
-		</ul>
-	</div>
-	<div class="container">
 		<table class="table-bordered" >
 	    <tr th:each="account : ${ledgerAccounts}">
-	        <td th:text="${account.number}">1</td>
-	        <td><a href="#" th:text="${account.name}">Title ...</a></td>
-	        <td th:text="${account.type}">Text ...</td>
+	        <td><a th:href="@{/ledger/account(id=${account.id})}"  th:text="${account.number}"></a></td>
+	        <td th:text="${account.name}" />
+	        <td th:text="${account.type}" />
     	</tr>
     	</table>
    	</div>
 	<div class="container">
 		<a href="/ledger/addaccount" class="btn btn-default">Add Account</a>
-		<a href="/ledger/deleteaccount" class="btn btn-default">Delet Account</a>
+		<a href="/ledger/deleteaccount" class="btn btn-default">Delete Account</a>
 		<!-- TODO create and download .cvs -->
 		<button type="button" class="btn btn-default">Export to .cvs</button>
 	</div>
