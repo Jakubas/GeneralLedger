@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>General Ledger</title>
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+</head>
+<body>
+	<div class="container">
+		<h3>Account</h3>
+		<dl class="row">
+	  		<dt class="col-sm-1">Number:</dt>
+	  		<dd th:text ="${ledgerAccount.number}">number</dd>
+	  		
+	 		<dt class="col-sm-1">Name:</dt>
+	  		<dd th:text ="${ledgerAccount.name}">name</dd>
+	  		
+	  		<dt class="col-sm-1">Type:</dt>
+	  		<dd th:text ="${ledgerAccount.type}">type</dd>
+  		</dl>
+	</div>
+	<div class="container">
+    	<h4>Entries</h4>
+    	<table class="table-bordered">
+    		<tr>
+    			<th>Date</th>
+    			<th>Description</th>
+    			<th>Debit</th>
+    			<th>Credit</th>
+    		</tr>
+		    <tr th:each="debitEntry : ${debitEntries}">
+		        <td th:text="${#calendars.format(debitEntry.date, 'dd/MM/yyyy')}" />
+		        <td th:text="${debitEntry.description}" />
+		        <td th:text="${debitEntry.amountToString()}"></td>
+		        <td>-</td>
+	    	</tr>
+ 			<tr th:each="creditEntry : ${creditEntries}">
+		        <td th:text="${#calendars.format(creditEntry.date, 'dd/MM/yyyy')}" />
+		        <td th:text="${creditEntry.description}" />
+		        <td>-</td>
+		        <td th:text="${creditEntry.amountToString()}"></td>
+	    	</tr>
+    	</table>
+	</div>
+	<div class="container">
+		<h4>New Transaction</h4>
+		<form action="/ledger/account/addtransaction" method="post">
+			<div class="form-group">
+				<label>Date:</label>
+				<input type="date" class="form-control" name="date" />
+			</div>
+			<div class="form-group">
+				<label>Description:</label>
+				<input type="text" class="form-control" name="description" />
+			</div>
+			<div class="form-group">
+		        <label>Amount:</label>
+				<input type="number" class="form-control" name="amount" step="any" />
+		    </div>
+		    <div class="form-group">
+		        <label for="credit">Account to Credit:</label>
+		        <select class="form-control" id="credit" name="creditId">
+		            <option th:each="account:${ledgerAccounts}" 
+		                    th:value="${account.id}" 
+		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
+		        </select>
+		    </div>
+		    <div class="form-group">
+		        <label for="debit">Account to Debit:</label>
+		        <select class="form-control" id="debit" name="debitId">
+		            <option th:each="account:${ledgerAccounts}" 
+		                    th:value="${account.id}" 
+		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
+		        </select>
+		    </div>
+			<button type="submit" class="btn btn-default">Create</button>
+		</form>	
+	</div>
+</body>
+</html>

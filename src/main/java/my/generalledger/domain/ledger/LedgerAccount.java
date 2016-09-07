@@ -43,8 +43,11 @@ public class LedgerAccount {
 	@Column(unique=true)
 	private String number;
 	
-	@OneToMany
-	private List<LedgerEntry> entries;
+	@OneToMany(mappedBy="creditAccount")
+	private List<Transaction> creditEntries;
+	
+	@OneToMany(mappedBy="debitAccount")
+	private List<Transaction> debitEntries;
 	
 	protected LedgerAccount() {}
 	
@@ -78,6 +81,14 @@ public class LedgerAccount {
 		this.number = number;
 	}
 	
+	public List<Transaction> getDebitEntries() {
+		return debitEntries;
+	}
+	
+	public List<Transaction> getCreditEntries() {
+		return creditEntries;
+	}
+
 	@Override
 	public String toString() {
 		return "LedgerAccount [id=" + id + ", name=" + name + ", type=" + type + ", number=" + number + "]";
