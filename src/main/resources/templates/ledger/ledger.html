@@ -7,12 +7,12 @@
 <body>
 	<div class="container">
 		<h3>Accounts</h3>
-		<table class="table-bordered" >
-	    <tr th:each="account : ${ledgerAccounts}">
-	        <td><a th:href="@{/ledger/account(id=${account.id})}"  th:text="${account.number}"></a></td>
-	        <td th:text="${account.name}" />
-	        <td th:text="${account.type}" />
-    	</tr>
+		<table class="table-bordered">
+		    <tr th:each="account : ${ledgerAccounts}">
+		        <td><a th:href="@{/ledger/account(id=${account.id})}"  th:text="${account.number}"></a></td>
+		        <td th:text="${account.name}" />
+		        <td th:text="${account.type}" />
+	    	</tr>
     	</table>
    	</div>
 	<div class="container">
