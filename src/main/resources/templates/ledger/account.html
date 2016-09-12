@@ -54,7 +54,7 @@
 			</div>
 			<div class="form-group">
 		        <label>Amount:</label>
-				<input type="number" class="form-control" name="amount" step="any" />
+				<input type="number" class="form-control" step="0.01" max="2147483647" name="amount"  />
 		    </div>
 		    <div class="form-group">
 		        <label for="credit">Account to Credit:</label>
@@ -72,6 +72,7 @@
 		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
 		        </select>
 		    </div>
+		    <input type="hidden" th:value="${ledgerAccount.id}" name="accountId" />
 			<button type="submit" class="btn btn-default">Create</button>
 		</form>	
 	</div>
