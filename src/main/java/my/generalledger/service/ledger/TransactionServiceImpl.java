@@ -33,8 +33,8 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public Transaction getAccountById(int id) {
-		return dao.getAccountById(id);
+	public Transaction getTransactionById(int id) {
+		return dao.getTransactionById(id);
 	}
 
 	@Override

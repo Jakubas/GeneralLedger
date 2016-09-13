@@ -11,7 +11,7 @@ public interface TransactionService {
 	void saveTransaction(Transaction transaction);
 	void saveTransaction(Calendar date, String description, int amount, 
 			LedgerAccount creditAccount, LedgerAccount debitAccount);
-	Transaction getAccountById(int id);
+	Transaction getTransactionById(int id);
 	List<Transaction> getTransactions();
 	void updateTransaction(Transaction transaction);
 	void deleteTransaction(Transaction transaction);

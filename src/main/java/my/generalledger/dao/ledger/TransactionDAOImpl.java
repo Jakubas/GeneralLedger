@@ -29,7 +29,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 
 	@Override
-	public Transaction getAccountById(int id) {
+	public Transaction getTransactionById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.get(Transaction.class, id);
 		return transaction;
