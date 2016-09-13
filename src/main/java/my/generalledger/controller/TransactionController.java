@@ -7,7 +7,6 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,5 +51,15 @@ public class TransactionController {
 		int id = Integer.valueOf(accountId);
 		redir.addAttribute("id", id);
 	    return "redirect:/ledger/account";
+	}
+	
+	@RequestMapping(value = "/ledger/account/deletetransaction", method = RequestMethod.DELETE)
+	public String deleteTransaction(RedirectAttributes redir,
+									@RequestParam(value = "accountId") String accountId,
+			                        @RequestParam(value = "transactionId") int transactionId) {
+		transactionService.deleteTransaction(transactionId);
+		int id = Integer.valueOf(accountId);
+		redir.addAttribute("id", id);
+		return "redirect:/ledger/account";
 	}
 }
