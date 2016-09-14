@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>General Ledger</title>
-	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
 	<div class="container">
@@ -20,24 +21,41 @@
 	</div>
 	<div class="container">
     	<h4>Entries</h4>
-    	<table class="table-bordered">
+    	<table class="table table-hover table-condensed table-striped" >
     		<tr>
     			<th>Date</th>
     			<th>Description</th>
     			<th>Debit</th>
     			<th>Credit</th>
+    			<th class="minimal_cell"></th>
     		</tr>
 		    <tr th:each="debitEntry : ${debitEntries}">
 		        <td th:text="${#calendars.format(debitEntry.date, 'dd/MM/yyyy')}" />
 		        <td th:text="${debitEntry.description}" />
 		        <td th:text="${debitEntry.amountToString()}"></td>
 		        <td>-</td>
+		        <td class="minimal_cell">
+		        	<form action="/ledger/account/deletetransaction" method="post">
+		        		<input type="hidden" name="_method" value="delete"/>
+		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${debitEntry.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+			        </form>
+			    </td>
 	    	</tr>
  			<tr th:each="creditEntry : ${creditEntries}">
 		        <td th:text="${#calendars.format(creditEntry.date, 'dd/MM/yyyy')}" />
 		        <td th:text="${creditEntry.description}" />
 		        <td>-</td>
 		        <td th:text="${creditEntry.amountToString()}"></td>
+		        <td class="minimal_cell">
+		        	<form action="/ledger/account/deletetransaction" method="post">
+		        		<input type="hidden" name="_method" value="delete"/>
+		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+			        </form>
+			    </td>
 	    	</tr>
     	</table>
 	</div>
