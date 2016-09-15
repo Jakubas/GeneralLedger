@@ -82,6 +82,23 @@ public class Transaction {
 		this.amount = amount;
 	}
 	
+	public LedgerAccount getCreditAccount() {
+		return creditAccount;
+	}
+
+	public void setCreditAccount(LedgerAccount creditAccount) {
+		this.creditAccount = creditAccount;
+	}
+
+	public LedgerAccount getDebitAccount() {
+		return debitAccount;
+	}
+
+	public void setDebitAccount(LedgerAccount debitAccount) {
+		this.debitAccount = debitAccount;
+	}
+	
+	
 	public String amountToString() {
 		NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US); 
 		String s = n.format(amount / 100.0);

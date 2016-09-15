@@ -48,6 +48,18 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
+	public void updateTransaction(int transactionId, Calendar date, String description, int amount,
+			LedgerAccount creditAccount, LedgerAccount debitAccount) {
+		Transaction transaction = dao.getTransactionById(transactionId);
+		transaction.setDate(date);
+		transaction.setDescription(description);
+		transaction.setAmount(amount);
+		transaction.setCreditAccount(creditAccount);
+		transaction.setDebitAccount(debitAccount);
+		dao.updateTransaction(transaction);
+	}
+	
+	@Override
 	public void deleteTransaction(Transaction transaction) {
 		dao.deleteTransaction(transaction);
 	}
