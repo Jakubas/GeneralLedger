@@ -2,7 +2,6 @@ package my.generalledger.domain.ledger;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +22,7 @@ public class Transaction {
 	private int id;
 	
 	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Calendar date;
 	
 	@NotNull
@@ -82,8 +81,24 @@ public class Transaction {
 		this.amount = amount;
 	}
 	
+	public LedgerAccount getCreditAccount() {
+		return creditAccount;
+	}
+
+	public void setCreditAccount(LedgerAccount creditAccount) {
+		this.creditAccount = creditAccount;
+	}
+
+	public LedgerAccount getDebitAccount() {
+		return debitAccount;
+	}
+
+	public void setDebitAccount(LedgerAccount debitAccount) {
+		this.debitAccount = debitAccount;
+	}
+	
 	public String amountToString() {
-		NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US); 
+		NumberFormat n = NumberFormat.getCurrencyInstance();
 		String s = n.format(amount / 100.0);
 		return s;
 	}

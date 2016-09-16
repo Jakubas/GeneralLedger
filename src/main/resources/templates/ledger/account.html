@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>General Ledger</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+	<div class="container">
+		<h3>Account</h3>
+		<dl class="row">
+	  		<dt class="col-sm-1">Number:</dt>
+	  		<dd th:text ="${ledgerAccount.number}">number</dd>
+	  		
+	 		<dt class="col-sm-1">Name:</dt>
+	  		<dd th:text ="${ledgerAccount.name}">name</dd>
+	  		
+	  		<dt class="col-sm-1">Type:</dt>
+	  		<dd th:text ="${ledgerAccount.type}">type</dd>
+  		</dl>
+	</div>
+	<div class="container">
+    	<h4>Entries</h4>
+    	<table class="table table-hover table-condensed table-striped" >
+    		<tr>
+    			<th>Date</th>
+    			<th>Description</th>
+    			<th>Debit</th>
+    			<th>Credit</th>
+    			<th class="minimal_cell"></th>
+    			<th class="minimal_cell"></th>
+    		</tr>
+		    <tr th:each="debitEntry : ${debitEntries}">
+		        <td th:text="${#calendars.format(debitEntry.date, 'dd/MM/yyyy')}" />
+		        <td th:text="${debitEntry.description}" />
+		        <td th:text="${debitEntry.amountToString()}"></td>
+		        <td>-</td>
+		        <td class="minimal_cell">
+		        	<form action="/ledger/account/deletetransaction" method="post">
+		        		<input type="hidden" name="_method" value="delete"/>
+		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${debitEntry.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+			        </form>
+			    </td>
+   		        <td class="minimal_cell">
+		        	<form action="/ledger/account/updatetransaction" method="get">
+		        		<input type="hidden" name="redirAccountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${debitEntry.id}"/>
+		        		<input type="hidden" name="creditId" th:value="${debitEntry.creditAccount.id}"/>
+		        		<input type="hidden" name="debitId" th:value="${debitEntry.debitAccount.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-edit" ></button>
+			        </form>
+			    </td>
+	    	</tr>
+ 			<tr th:each="creditEntry : ${creditEntries}">
+		        <td th:text="${#calendars.format(creditEntry.date, 'dd/MM/yyyy')}" />
+		        <td th:text="${creditEntry.description}" />
+		        <td>-</td>
+		        <td th:text="${creditEntry.amountToString()}"></td>
+		        <td class="minimal_cell">
+		        	<form action="/ledger/account/deletetransaction" method="post">
+		        		<input type="hidden" name="_method" value="delete"/>
+		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+			        </form>
+			    </td>
+     		    <td class="minimal_cell">
+		        	<form action="/ledger/account/updatetransaction" method="get">
+		        		<input type="hidden" name="redirAccountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
+    				    <input type="hidden" name="creditId" th:value="${creditEntry.creditAccount.id}"/>
+		        		<input type="hidden" name="debitId" th:value="${creditEntry.debitAccount.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-edit" ></button>
+			        </form>
+			    </td>
+	    	</tr>
+    	</table>
+	</div>
+	<div class="container">
+		<h4>New Transaction</h4>
+		<form action="/ledger/account/addtransaction" method="post">
+			<div class="form-group">
+				<label>Date:</label>
+				<input type="date" class="form-control" name="date" />
+			</div>
+			<div class="form-group">
+				<label>Description:</label>
+				<input type="text" class="form-control" name="description" />
+			</div>
+			<div class="form-group">
+		        <label>Amount:</label>
+				<input type="number" class="form-control" step="0.01" max="2147483647" name="amount" />
+		    </div>
+		    <div class="form-group">
+		        <label for="credit">Account to Credit:</label>
+		        <select class="form-control" id="credit" name="creditId">
+		            <option th:each="account:${ledgerAccounts}" 
+		                    th:value="${account.id}" 
+		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
+		        </select>
+		    </div>
+		    <div class="form-group">
+		        <label for="debit">Account to Debit:</label>
+		        <select class="form-control" id="debit" name="debitId">
+		            <option th:each="account:${ledgerAccounts}" 
+		                    th:value="${account.id}" 
+		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
+		        </select>
+		    </div>
+		    <input type="hidden" th:value="${ledgerAccount.id}" name="accountId" />
+			<button type="submit" class="btn btn-default">Create</button>
+		</form>	
+	</div>
+</body>
+</html>

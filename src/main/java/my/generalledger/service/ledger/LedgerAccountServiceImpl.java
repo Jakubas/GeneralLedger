@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import my.generalledger.dao.ledger.LedgerAccountDAO;
 import my.generalledger.domain.ledger.LedgerAccount;
+import my.generalledger.domain.ledger.LedgerAccount.Type;
 
 @Service
 public class LedgerAccountServiceImpl implements LedgerAccountService {
@@ -20,6 +21,12 @@ public class LedgerAccountServiceImpl implements LedgerAccountService {
 	
 	@Override
 	public void saveAccount(LedgerAccount ledgerAccount) {
+		dao.saveAccount(ledgerAccount);
+	}
+	
+	@Override
+	public void saveAccount(String name, Type type, String number) {
+		LedgerAccount ledgerAccount = new LedgerAccount(name, type, number);
 		dao.saveAccount(ledgerAccount);
 	}
 

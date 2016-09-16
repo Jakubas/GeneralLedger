@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>General Ledger</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<h4>New Transaction</h4>
+		<form action="/ledger/account/updatetransaction" method="post">
+			<div class="form-group">
+				<label>Date:</label>
+				<input type="date" class="form-control" name="date" 
+					   th:value="${#calendars.format(transaction.date,'yyyy-MM-dd')}" />
+			</div>
+			<div class="form-group">
+				<label>Description:</label>
+				<input type="text" class="form-control" name="description" 
+			   		   th:value="${transaction.description}" />
+			</div>
+			<div class="form-group">
+		        <label>Amount:</label>
+				<input type="text" class="form-control" step="0.01" max="2147483647" name="amount" 
+					   th:value="${transaction.amountToString()}" />
+		    </div>
+		    <div class="form-group">
+		        <label for="credit">Account to Credit:</label>
+		        <select class="form-control" id="credit" name="creditId">
+		            <option th:each="account:${ledgerAccounts}" 
+		                    th:value="${account.id}" 
+		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
+		           	<option th:value="${transaction.creditAccount.id}" selected="selected"
+		           			th:text="${'number: ' + creditAccount.number + ', name: ' + creditAccount.name}" />
+		        </select>
+		    </div>
+		    <div class="form-group">
+		        <label for="debit">Account to Debit:</label>
+		        <select class="form-control" id="debit" name="debitId">
+		            <option th:each="account:${ledgerAccounts}" 
+		                    th:value="${account.id}" 
+		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
+		        	<option th:value="${transaction.debitAccount.id}" selected="selected"
+		        			th:text="${'number: ' + debitAccount.number + ', name: ' + debitAccount.name}" />
+		        </select>
+		    </div>
+		    <input type="hidden" th:value="${redirAccount.id}" name="accountId" />
+		    <input type="hidden" th:value="${transaction.id}" name="transactionId" />
+       		<input type="hidden" name="_method" value="put"/>
+			<button type="submit" class="btn btn-default">Update</button>
+		</form>	
+	</div>
+</body>
+</html>

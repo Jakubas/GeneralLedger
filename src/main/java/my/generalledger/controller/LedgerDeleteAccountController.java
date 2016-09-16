@@ -13,27 +13,22 @@ import my.generalledger.domain.ledger.LedgerAccount;
 import my.generalledger.service.ledger.LedgerAccountService;
 
 @Controller
-public class LedgerController {
-	
+public class LedgerDeleteAccountController {
+
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
 	
-	@RequestMapping(value = "/ledger", method = RequestMethod.GET)
-	public String getLedger(Model model) {
+	@RequestMapping(value = "/ledger/deleteaccount", method = RequestMethod.GET)
+	public String getDeleteAccountPage(Model model) {
 		List<LedgerAccount> accounts = ledgerAccountService.getAccounts();
 		model.addAttribute("ledgerAccounts", accounts);
-		return "ledger/ledger";
+		return "ledger/deleteaccount";
 	}
 	
-	@RequestMapping(value = "/ledger/account", method = RequestMethod.GET)
-	public String getAccount(@RequestParam(value = "id") int id, Model model) {
-		List<LedgerAccount> accounts = ledgerAccountService.getAccounts();
-		model.addAttribute("ledgerAccounts", accounts);
-		
-		LedgerAccount account = ledgerAccountService.getAccountById(id);
-		model.addAttribute("ledgerAccount", account);
-		model.addAttribute("debitEntries", account.getDebitEntries());
-		model.addAttribute("creditEntries", account.getCreditEntries());
-		return "ledger/account";
+	@RequestMapping(value = "/ledger/deleteaccount", method = RequestMethod.POST)
+	public String deleteAccount(@RequestParam(value="id") int id) {
+		LedgerAccount la = ledgerAccountService.getAccountById(id);
+		ledgerAccountService.deleteAccount(la);
+		return "redirect:/ledger";
 	}
 }

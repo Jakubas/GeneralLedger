@@ -2,16 +2,17 @@ package my.generalledger.dao.ledger;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import my.generalledger.domain.ledger.LedgerAccount;
 
-@Transactional
 @Repository
+@Transactional
 public class LedgerAccountDAOImpl implements LedgerAccountDAO {
 
 	private final SessionFactory sessionFactory;
@@ -26,7 +27,7 @@ public class LedgerAccountDAOImpl implements LedgerAccountDAO {
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(ledgerAccount);
 	}
-
+	
 	@Override
 	public LedgerAccount getAccountById(int id) {
 		Session session = sessionFactory.getCurrentSession();
