@@ -29,7 +29,7 @@ public class TransactionServiceImpl implements TransactionService {
 	public void saveTransaction(Calendar date, String description, int amount, 
 			LedgerAccount creditAccount, LedgerAccount debitAccount) {
 		Transaction transaction = new Transaction(date, description, amount, creditAccount, debitAccount);
-		dao.saveTransaction(transaction);
+		saveTransaction(transaction);
 	}
 
 	@Override
@@ -50,13 +50,13 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void updateTransaction(int transactionId, Calendar date, String description, int amount,
 			LedgerAccount creditAccount, LedgerAccount debitAccount) {
-		Transaction transaction = dao.getTransactionById(transactionId);
+		Transaction transaction = getTransactionById(transactionId);
 		transaction.setDate(date);
 		transaction.setDescription(description);
 		transaction.setAmount(amount);
 		transaction.setCreditAccount(creditAccount);
 		transaction.setDebitAccount(debitAccount);
-		dao.updateTransaction(transaction);
+		updateTransaction(transaction);
 	}
 	
 	@Override
@@ -67,6 +67,6 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void deleteTransaction(int id) {
 		Transaction transaction = dao.getTransactionById(id);
-		dao.deleteTransaction(transaction);
+		deleteTransaction(transaction);
 	}
 }

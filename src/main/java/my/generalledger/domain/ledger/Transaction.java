@@ -2,7 +2,6 @@ package my.generalledger.domain.ledger;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -98,9 +97,8 @@ public class Transaction {
 		this.debitAccount = debitAccount;
 	}
 	
-	
 	public String amountToString() {
-		NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US); 
+		NumberFormat n = NumberFormat.getCurrencyInstance();
 		String s = n.format(amount / 100.0);
 		return s;
 	}

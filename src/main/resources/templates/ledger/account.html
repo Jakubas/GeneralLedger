@@ -28,6 +28,7 @@
     			<th>Debit</th>
     			<th>Credit</th>
     			<th class="minimal_cell"></th>
+    			<th class="minimal_cell"></th>
     		</tr>
 		    <tr th:each="debitEntry : ${debitEntries}">
 		        <td th:text="${#calendars.format(debitEntry.date, 'dd/MM/yyyy')}" />
@@ -42,6 +43,15 @@
 		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
 			        </form>
 			    </td>
+   		        <td class="minimal_cell">
+		        	<form action="/ledger/account/updatetransaction" method="get">
+		        		<input type="hidden" name="redirAccountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${debitEntry.id}"/>
+		        		<input type="hidden" name="creditId" th:value="${debitEntry.creditAccount.id}"/>
+		        		<input type="hidden" name="debitId" th:value="${debitEntry.debitAccount.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-edit" ></button>
+			        </form>
+			    </td>
 	    	</tr>
  			<tr th:each="creditEntry : ${creditEntries}">
 		        <td th:text="${#calendars.format(creditEntry.date, 'dd/MM/yyyy')}" />
@@ -54,6 +64,15 @@
 		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
 		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
 		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+			        </form>
+			    </td>
+     		    <td class="minimal_cell">
+		        	<form action="/ledger/account/updatetransaction" method="get">
+		        		<input type="hidden" name="redirAccountId" th:value="${ledgerAccount.id}"/>
+		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
+    				    <input type="hidden" name="creditId" th:value="${creditEntry.creditAccount.id}"/>
+		        		<input type="hidden" name="debitId" th:value="${creditEntry.debitAccount.id}"/>
+		        		<button type="submit" class="btn btn-link glyphicon glyphicon-edit" ></button>
 			        </form>
 			    </td>
 	    	</tr>
@@ -72,7 +91,7 @@
 			</div>
 			<div class="form-group">
 		        <label>Amount:</label>
-				<input type="number" class="form-control" step="0.01" max="2147483647" name="amount"  />
+				<input type="number" class="form-control" step="0.01" max="2147483647" name="amount" />
 		    </div>
 		    <div class="form-group">
 		        <label for="credit">Account to Credit:</label>
