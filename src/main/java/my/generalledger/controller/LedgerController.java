@@ -2,6 +2,8 @@ package my.generalledger.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import my.generalledger.service.ledger.LedgerAccountService;
 @Controller
 public class LedgerController {
 	
+	private final static Logger logger = LoggerFactory.getLogger(LedgerController.class);
+	
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
 	
@@ -22,6 +26,7 @@ public class LedgerController {
 	public String getLedger(Model model) {
 		List<LedgerAccount> accounts = ledgerAccountService.getAccounts();
 		model.addAttribute("ledgerAccounts", accounts);
+		logger.info("retrieving view for displaying ledger accounts");
 		return "ledger/ledger";
 	}
 	
@@ -34,6 +39,7 @@ public class LedgerController {
 		model.addAttribute("ledgerAccount", account);
 		model.addAttribute("debitEntries", account.getDebitEntries());
 		model.addAttribute("creditEntries", account.getCreditEntries());
+		logger.info("retrieving view for displaying account info and entries");
 		return "ledger/account";
 	}
 }

@@ -3,6 +3,8 @@ package my.generalledger.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import my.generalledger.service.ledger.TransactionService;
 
 @Controller
 public class TransactionController {
+	
+	private final static Logger logger = LoggerFactory.getLogger(TransactionController.class);
 	
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
@@ -36,9 +40,11 @@ public class TransactionController {
 		LedgerAccount creditAccount = ledgerAccountService.getAccountById(creditId);
 		LedgerAccount debitAccount = ledgerAccountService.getAccountById(debitId);
 		int amount = Utils.CurrencyStringToInt(amountStr);
+		logger.debug("creating a new transaction");
 		transactionService.saveTransaction(cal, description, amount, creditAccount, debitAccount);
 		int id = Integer.valueOf(accountId);
 		redir.addAttribute("id", id);
+		logger.debug("redirecting to account page");
 	    return "redirect:/ledger/account";
 	}
 	
@@ -58,6 +64,7 @@ public class TransactionController {
 		model.addAttribute("creditAccount", creditAccount);
 		LedgerAccount debitAccount = ledgerAccountService.getAccountById(debitId);
 		model.addAttribute("debitAccount", debitAccount);
+		logger.info("retrieving view for updating transactions");
 		return "/ledger/updatetransaction";
 	}
 	
@@ -75,6 +82,7 @@ public class TransactionController {
 		int amount = Utils.CurrencyStringToInt(amountStr);
 		LedgerAccount creditAccount = ledgerAccountService.getAccountById(creditId);
 		LedgerAccount debitAccount = ledgerAccountService.getAccountById(debitId);
+		logger.debug("calling service to update transaction: " + transactionId);
 		transactionService.updateTransaction(transactionId, cal, description, 
 				amount, creditAccount, debitAccount);
 		
@@ -87,6 +95,7 @@ public class TransactionController {
 	public String deleteTransaction(RedirectAttributes redir,
 									@RequestParam(value = "accountId") int accountId,
 			                        @RequestParam(value = "transactionId") int transactionId) {
+		logger.debug("calling service to delete transaction: " + transactionId);
 		transactionService.deleteTransaction(transactionId);
 		redir.addAttribute("id", accountId);
 		return "redirect:/ledger/account";
