@@ -2,6 +2,7 @@ package my.generalledger.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import my.generalledger.service.ledger.LedgerAccountService;
 @Controller
 public class LedgerDeleteAccountController {
 
+	private final static Logger logger = Logger.getLogger(LedgerDeleteAccountController.class);
+	
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
 	
@@ -22,12 +25,14 @@ public class LedgerDeleteAccountController {
 	public String getDeleteAccountPage(Model model) {
 		List<LedgerAccount> accounts = ledgerAccountService.getAccounts();
 		model.addAttribute("ledgerAccounts", accounts);
+		logger.info("retrieving view for deleting ledger accounts");
 		return "ledger/deleteaccount";
 	}
 	
 	@RequestMapping(value = "/ledger/deleteaccount", method = RequestMethod.POST)
 	public String deleteAccount(@RequestParam(value="id") int id) {
 		LedgerAccount la = ledgerAccountService.getAccountById(id);
+		logger.debug("calling service to delete ledger account: " + id);
 		ledgerAccountService.deleteAccount(la);
 		return "redirect:/ledger";
 	}
