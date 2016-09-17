@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import my.generalledger.domain.ledger.Transaction;
 @Transactional
 public class TransactionDAOImpl implements TransactionDAO {
 
-	private final static Logger logger = Logger.getLogger(TransactionDAOImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(TransactionDAOImpl.class);
 	
 	private final SessionFactory sessionFactory;
 	

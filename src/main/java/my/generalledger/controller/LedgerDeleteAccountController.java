@@ -2,7 +2,8 @@ package my.generalledger.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ import my.generalledger.service.ledger.LedgerAccountService;
 @Controller
 public class LedgerDeleteAccountController {
 
-	private final static Logger logger = Logger.getLogger(LedgerDeleteAccountController.class);
+	private final static Logger logger = LoggerFactory.getLogger(LedgerDeleteAccountController.class);
 	
 	@Autowired
 	private LedgerAccountService ledgerAccountService;

@@ -3,7 +3,8 @@ package my.generalledger.service.ledger;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import my.generalledger.domain.ledger.Transaction;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
-	private final static Logger logger = Logger.getLogger(TransactionServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);
 	
 	private final TransactionDAO dao;
 	

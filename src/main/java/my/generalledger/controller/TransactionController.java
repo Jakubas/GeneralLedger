@@ -3,7 +3,8 @@ package my.generalledger.controller;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,7 @@ import my.generalledger.service.ledger.TransactionService;
 @Controller
 public class TransactionController {
 	
-	private final static Logger logger = Logger.getLogger(TransactionController.class);
+	private final static Logger logger = LoggerFactory.getLogger(TransactionController.class);
 	
 	@Autowired
 	private LedgerAccountService ledgerAccountService;

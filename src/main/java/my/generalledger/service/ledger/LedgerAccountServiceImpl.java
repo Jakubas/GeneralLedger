@@ -2,7 +2,8 @@ package my.generalledger.service.ledger;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import my.generalledger.domain.ledger.LedgerAccount.Type;
 @Service
 public class LedgerAccountServiceImpl implements LedgerAccountService {
 
-	private final static Logger logger = Logger.getLogger(LedgerAccountServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(LedgerAccountServiceImpl.class);
 	
 	private final LedgerAccountDAO dao;
 	

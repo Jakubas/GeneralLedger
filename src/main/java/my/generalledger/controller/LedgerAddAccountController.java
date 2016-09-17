@@ -1,6 +1,7 @@
 package my.generalledger.controller;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,8 @@ import my.generalledger.service.ledger.LedgerAccountService;
 
 @Controller
 public class LedgerAddAccountController {
-
-	private final static Logger logger = Logger.getLogger(LedgerAddAccountController.class);
+	
+	private final Logger logger = LoggerFactory.getLogger(LedgerAddAccountController.class);
 	
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
