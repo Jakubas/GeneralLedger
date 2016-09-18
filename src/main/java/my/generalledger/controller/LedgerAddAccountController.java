@@ -19,13 +19,13 @@ public class LedgerAddAccountController {
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
 	
-	@RequestMapping(value = "/ledger/addaccount", method = RequestMethod.GET)
+	@RequestMapping(value = "/ledger/accounts/add", method = RequestMethod.GET)
 	public String getAddAccountPage() {
 		logger.info("retrieving view for adding new ledger accounts");
 		return "ledger/addaccount";
 	}
 	
-	@RequestMapping(value = "/ledger/addaccount", method = RequestMethod.POST)
+	@RequestMapping(value = "/ledger/accounts/add", method = RequestMethod.POST)
 	public String addAccount(@RequestParam(value = "name") String name,
 								   @RequestParam(value = "type") Type type,
 							       @RequestParam(value = "number") String number) {

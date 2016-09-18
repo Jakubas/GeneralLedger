@@ -30,7 +30,7 @@ public class LedgerController {
 		return "ledger/ledger";
 	}
 	
-	@RequestMapping(value = "/ledger/account", method = RequestMethod.GET)
+	@RequestMapping(value = "/ledger/accounts", method = RequestMethod.GET)
 	public String getAccount(@RequestParam(value = "id") int id, Model model) {
 		List<LedgerAccount> accounts = ledgerAccountService.getAccounts();
 		model.addAttribute("ledgerAccounts", accounts);

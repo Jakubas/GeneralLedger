@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<h3>Delete Acccount</h3>
-		<form action="/ledger/deleteaccount/" method="post">
+		<form action="/ledger/accounts/delete" method="post">
  	   		<div class="form-group">
 		        <label for="acc">Account:</label>
 		        <select class="form-control" id="acc" name="id">
@@ -16,6 +16,7 @@
 		                    th:text="${'number: ' + account.number + ', name: ' + account.name}" />
 		        </select>
 		    </div>
+		    <input type="hidden" name="_method" value="delete" />
 		    <button type="submit" class="btn btn-default">Delete</button>
 		</form>
 	</div>

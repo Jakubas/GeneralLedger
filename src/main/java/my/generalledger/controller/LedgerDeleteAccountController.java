@@ -22,7 +22,7 @@ public class LedgerDeleteAccountController {
 	@Autowired
 	private LedgerAccountService ledgerAccountService;
 	
-	@RequestMapping(value = "/ledger/deleteaccount", method = RequestMethod.GET)
+	@RequestMapping(value = "/ledger/accounts/delete", method = RequestMethod.GET)
 	public String getDeleteAccountPage(Model model) {
 		List<LedgerAccount> accounts = ledgerAccountService.getAccounts();
 		model.addAttribute("ledgerAccounts", accounts);
@@ -30,7 +30,7 @@ public class LedgerDeleteAccountController {
 		return "ledger/deleteaccount";
 	}
 	
-	@RequestMapping(value = "/ledger/deleteaccount", method = RequestMethod.POST)
+	@RequestMapping(value = "/ledger/accounts/delete", method = RequestMethod.DELETE)
 	public String deleteAccount(@RequestParam(value="id") int id) {
 		LedgerAccount la = ledgerAccountService.getAccountById(id);
 		logger.debug("calling service to delete ledger account: " + id);

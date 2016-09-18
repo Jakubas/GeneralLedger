@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<h4>New Transaction</h4>
-		<form action="/ledger/account/updatetransaction" method="post">
+		<form action="/ledger/accounts/{redirAccount.id}/transactions/update" method="post">
 			<div class="form-group">
 				<label>Date:</label>
 				<input type="date" class="form-control" name="date" 

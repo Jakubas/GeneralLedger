@@ -28,7 +28,7 @@ public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
 	
-	@RequestMapping(value = "/ledger/account/addtransaction", method = RequestMethod.POST)
+	@RequestMapping(value = "/ledger/accounts/{accountId}/transactions/add", method = RequestMethod.POST)
 	public String addTransaction(RedirectAttributes redir,
 								 @RequestParam(value = "accountId") String accountId,
 			                     @RequestParam(value = "date") String date,
@@ -45,10 +45,11 @@ public class TransactionController {
 		int id = Integer.valueOf(accountId);
 		redir.addAttribute("id", id);
 		logger.debug("redirecting to account page");
-	    return "redirect:/ledger/account";
+	    return "redirect:/ledger/accounts";
 	}
 	
-	@RequestMapping(value = "/ledger/account/updatetransaction", method = RequestMethod.GET)
+	@RequestMapping(value = "/ledger/accounts/{redirAccountId}/transactions/update", 
+					method = RequestMethod.GET)
 	public String updateTransaction(Model model,
 									@RequestParam(value = "redirAccountId") int redirAccountId,
 									@RequestParam(value = "transactionId") int transactionId,
@@ -68,7 +69,7 @@ public class TransactionController {
 		return "/ledger/updatetransaction";
 	}
 	
-	@RequestMapping(value = "/ledger/account/updatetransaction", method = RequestMethod.PUT)
+	@RequestMapping(value = "/ledger/accounts/{accountId}/transactions/update", method = RequestMethod.PUT)
 	public String updateTransaction(RedirectAttributes redir,
 									@RequestParam(value = "accountId") int accountId,
 									@RequestParam(value = "transactionId") int transactionId,
@@ -88,16 +89,16 @@ public class TransactionController {
 		
 		redir.addAttribute("id", accountId);
 		//redirect to the account page from where transaction update was initiated
-		return "redirect:/ledger/account";
+		return "redirect:/ledger/accounts";
 	}
 	
-	@RequestMapping(value = "/ledger/account/deletetransaction", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/ledger/accounts/{accountId}/transactions/delete", method = RequestMethod.DELETE)
 	public String deleteTransaction(RedirectAttributes redir,
 									@RequestParam(value = "accountId") int accountId,
 			                        @RequestParam(value = "transactionId") int transactionId) {
 		logger.debug("calling service to delete transaction: " + transactionId);
 		transactionService.deleteTransaction(transactionId);
 		redir.addAttribute("id", accountId);
-		return "redirect:/ledger/account";
+		return "redirect:/ledger/accounts";
 	}
 }
