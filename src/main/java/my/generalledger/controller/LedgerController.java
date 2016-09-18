@@ -28,4 +28,9 @@ public class LedgerController {
 		logger.info("retrieving view for displaying ledger accounts");
 		return "ledger/ledger";
 	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getLanding() {
+		return "index";
+	}
 }
