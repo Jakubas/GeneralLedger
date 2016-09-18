@@ -9,12 +9,15 @@ This project is a general ledger web application. Users can add accounts and tra
 general ledger. Transactions are added in accordance to the double-entry bookkeeping system, 
 where every transaction has to be recorded twice, once as a debit entry and once as a credit entry.
 
+Accounts can be deleted if they have no transactions. Transactions can be deleted or updated. When a transaction is deleted or updated then both corresponding entries are modified as well.
+ 
 A user can view the trial balance, which is a statement of all credits and debits in the general ledger. 
-The trial balance and general ledger can be viewed in the application or they can be exported to a .csv file.
+The trial balance and general ledger can be viewed in the application and they can be exported to a .csv file.
 
 ## Technologies Used
 - Java 8
 - Spring(Spring Boot, Spring MVC)
 - JPA/Hibernate
 - MySQL
+- SLF4J
 - Thymeleaf
