@@ -18,8 +18,8 @@
 	</nav>
 	<div class="container">
 		<h3>Account</h3>
-		<dl class="row">
-	  		<dt class="col-sm-1">Number:</dt>
+		<dl class="dl-horizontal">
+	  		<dt>Number:</dt>
 	  		<dd th:text ="${ledgerAccount.number}">number</dd>
 	  		
 	 		<dt class="col-sm-1">Name:</dt>
@@ -38,7 +38,6 @@
     			<th>Debit</th>
     			<th>Credit</th>
     			<th class="minimal_cell"></th>
-    			<th class="minimal_cell"></th>
     		</tr>
 		    <tr th:each="debitEntry : ${debitEntries}">
 		        <td th:text="${#calendars.format(debitEntry.date, 'dd/MM/yyyy')}" />
@@ -46,20 +45,22 @@
 		        <td th:text="${debitEntry.amountToString()}"></td>
 		        <td>-</td>
 		        <td class="minimal_cell">
-		        	<form action="/ledger/accounts/{accountId}/transactions/delete" method="post">
+		        	<form class="form-noborder" action="/ledger/accounts/{accountId}/transactions/delete" method="post">
 		        		<input type="hidden" name="_method" value="delete"/>
 		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
 		        		<input type="hidden" name="transactionId" th:value="${debitEntry.id}"/>
-		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+		        		<div class='col-xs-1'>
+		        			<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle"></button>
+		        		</div>
 			        </form>
-			    </td>
-   		        <td class="minimal_cell">
-		        	<form action="/ledger/accounts/{accountId}/transactions/update" method="get">
+     		        <form class="form-noborder" action="/ledger/accounts/{accountId}/transactions/update" method="get">
 		        		<input type="hidden" name="redirAccountId" th:value="${ledgerAccount.id}"/>
 		        		<input type="hidden" name="transactionId" th:value="${debitEntry.id}"/>
-		        		<input type="hidden" name="creditId" th:value="${debitEntry.creditAccount.id}"/>
+    				    <input type="hidden" name="creditId" th:value="${debitEntry.creditAccount.id}"/>
 		        		<input type="hidden" name="debitId" th:value="${debitEntry.debitAccount.id}"/>
-		        		<button type="submit" class="btn btn-link glyphicon glyphicon-edit" ></button>
+		        		<div class='col-xs-1'>
+		        			<button type="submit" class="btn btn-link glyphicon glyphicon-edit"></button>
+	     			    </div>
 			        </form>
 			    </td>
 	    	</tr>
@@ -69,20 +70,22 @@
 		        <td>-</td>
 		        <td th:text="${creditEntry.amountToString()}"></td>
 		        <td class="minimal_cell">
-		        	<form action="/ledger/accounts/{accountId}/transactions/delete" method="post">
+		        	<form class="form-noborder" action="/ledger/accounts/{accountId}/transactions/delete" method="post">
 		        		<input type="hidden" name="_method" value="delete"/>
 		        		<input type="hidden" name="accountId" th:value="${ledgerAccount.id}"/>
 		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
-		        		<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle" ></button>
+		        		<div class='col-xs-1'>
+		        			<button type="submit" class="btn btn-link glyphicon glyphicon-remove-circle"></button>
+		        		</div>
 			        </form>
-			    </td>
-     		    <td class="minimal_cell">
-		        	<form action="/ledger/accounts/{accountId}/transactions/update" method="get">
+     		        <form class="form-noborder" action="/ledger/accounts/{accountId}/transactions/update" method="get">
 		        		<input type="hidden" name="redirAccountId" th:value="${ledgerAccount.id}"/>
 		        		<input type="hidden" name="transactionId" th:value="${creditEntry.id}"/>
     				    <input type="hidden" name="creditId" th:value="${creditEntry.creditAccount.id}"/>
 		        		<input type="hidden" name="debitId" th:value="${creditEntry.debitAccount.id}"/>
-		        		<button type="submit" class="btn btn-link glyphicon glyphicon-edit" ></button>
+		        		<div class='col-xs-1'>
+		        			<button type="submit" class="btn btn-link glyphicon glyphicon-edit"></button>
+	     			    </div>
 			        </form>
 			    </td>
 	    	</tr>
