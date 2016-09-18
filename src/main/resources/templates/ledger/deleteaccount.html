@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Delete Account</title>
-	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
 	<div class="container">
 		<h3>Delete Acccount</h3>
+		<p>An account can only be deleted if it has no entries</p>
 		<form action="/ledger/accounts/delete" method="post">
  	   		<div class="form-group">
 		        <label for="acc">Account:</label>

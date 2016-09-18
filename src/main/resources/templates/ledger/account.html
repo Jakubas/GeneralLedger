@@ -82,16 +82,17 @@
 		<h4>New Transaction</h4>
 		<form action="/ledger/accounts/{accountId}/transactions/add" method="post">
 			<div class="form-group">
-				<label>Date:</label>
-				<input type="date" class="form-control" name="date" />
+				<label for="date">Date:</label>
+				<input type="date" class="form-control" id="date" name="date" />
 			</div>
 			<div class="form-group">
-				<label>Description:</label>
-				<input type="text" class="form-control" name="description" />
+				<label for="description">Description:</label>
+				<input type="text" class="form-control" id="description" name="description" />
 			</div>
 			<div class="form-group">
-		        <label>Amount:</label>
-				<input type="number" class="form-control" step="0.01" max="2147483647" name="amount" />
+		        <label for="amount">Amount:</label>
+				<input type="number" class="form-control" id="amount" step="0.01" max="2147483647" 
+				name="amount" value = "0.00" />
 		    </div>
 		    <div class="form-group">
 		        <label for="credit">Account to Credit:</label>

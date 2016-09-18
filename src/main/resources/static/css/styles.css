@@ -1,19 +1,5 @@
-label {
-    display: inline-block;
-    float: left;
-    clear: left;
-    width: 150px;
-    text-align: right;
-}
-input {
-  display: inline-block;
-  float: left;
-}
-
 .table.table-striped .minimal_cell {
     background: none;
     background-color: white;
     border-width: 0;
 }
-
-

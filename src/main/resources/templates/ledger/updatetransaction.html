@@ -24,7 +24,7 @@
 					   th:value="${transaction.amountToString()}" />
 		    </div>
 		    <div class="form-group">
-		        <label for="credit">Account to Credit:</label>
+		        <label>Account to Credit:</label>
 		        <select class="form-control" id="credit" name="creditId">
 		            <option th:each="account:${ledgerAccounts}" 
 		                    th:value="${account.id}" 
@@ -34,7 +34,7 @@
 		        </select>
 		    </div>
 		    <div class="form-group">
-		        <label for="debit">Account to Debit:</label>
+		        <label>Account to Debit:</label>
 		        <select class="form-control" id="debit" name="debitId">
 		            <option th:each="account:${ledgerAccounts}" 
 		                    th:value="${account.id}" 
