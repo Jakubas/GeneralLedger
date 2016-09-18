@@ -32,7 +32,7 @@ public class LedgerAccountServiceImpl implements LedgerAccountService {
 	public void saveAccount(String name, Type type, String number) {
 		LedgerAccount ledgerAccount = new LedgerAccount(name, type, number);
 		logger.debug("created ledger account: " + ledgerAccount.getId());
-		dao.saveAccount(ledgerAccount);
+		saveAccount(ledgerAccount);
 	}
 
 	@Override
