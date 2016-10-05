@@ -4,3 +4,4 @@ target/
 .project
 webapp/
 logs/
+*.csv*

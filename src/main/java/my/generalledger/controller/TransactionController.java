@@ -66,7 +66,7 @@ public class TransactionController {
 		LedgerAccount debitAccount = ledgerAccountService.getAccountById(debitId);
 		model.addAttribute("debitAccount", debitAccount);
 		logger.info("retrieving view for updating transactions");
-		return "/ledger/updatetransaction";
+		return "ledger/updatetransaction";
 	}
 	
 	@RequestMapping(value = "/ledger/accounts/{accountId}/transactions/update", method = RequestMethod.PUT)
