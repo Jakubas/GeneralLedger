@@ -1,4 +1,4 @@
-# Spring Boot General Ledger
+# General Ledger
 
 A general ledger is a company's set of numbered accounts for its accounting records. The ledger provides
 a complete record of financial transactions over the life of the company. The ledger holds account 
@@ -15,9 +15,10 @@ A user can view the trial balance, which is a statement of all credits and debit
 The trial balance and general ledger can be viewed in the application and they can be exported to a .csv file.
 
 ## Technologies Used
-- Java 8
+- Java, HTML, CSS
 - Spring(Spring Boot, Spring MVC)
 - JPA/Hibernate
 - MySQL
 - SLF4J
 - Thymeleaf
+- Bootstrap
