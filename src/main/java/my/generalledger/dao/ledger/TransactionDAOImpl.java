@@ -1,17 +1,15 @@
 package my.generalledger.dao.ledger;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import my.generalledger.domain.ledger.Transaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import my.generalledger.domain.ledger.Transaction;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -37,8 +35,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 	public Transaction getTransactionById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		logger.debug("retrieving transaction by id: " + id);
-		Transaction transaction = session.get(Transaction.class, id);
-		return transaction;
+		return session.get(Transaction.class, id);
 	}
 
 	@Override
@@ -46,9 +43,8 @@ public class TransactionDAOImpl implements TransactionDAO {
 	public List<Transaction> getTransactions() {
 		Session session = sessionFactory.getCurrentSession();
 		logger.debug("retrieving list of transactions");
-		List<Transaction> list = session.createSQLQuery("SELECT * FROM test.ledger_entry")
+		return session.createSQLQuery("SELECT * FROM ledger_entry")
 				.addEntity(Transaction.class).list();
-		return list;
 	}
 
 	@Override
