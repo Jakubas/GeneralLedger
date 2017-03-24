@@ -5,3 +5,5 @@ target/
 webapp/
 logs/
 *.csv*
+.idea
+*.iml
