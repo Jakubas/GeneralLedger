@@ -1,16 +1,15 @@
 package my.generalledger.service.ledger;
 
-import java.util.Calendar;
-import java.util.List;
-
+import my.generalledger.dao.ledger.TransactionDAO;
+import my.generalledger.domain.ledger.LedgerAccount;
+import my.generalledger.domain.ledger.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import my.generalledger.dao.ledger.TransactionDAO;
-import my.generalledger.domain.ledger.LedgerAccount;
-import my.generalledger.domain.ledger.Transaction;
+import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -25,8 +24,8 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 	
 	@Override
-	public void saveTransaction(Transaction transcaction) {
-		dao.saveTransaction(transcaction);
+	public void saveTransaction(Transaction transaction) {
+		dao.saveTransaction(transaction);
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 .table.table-striped .minimal_cell {
-    background: none;
-    background-color: white;
+    background: white none;
     border-width: 0;
 }
 

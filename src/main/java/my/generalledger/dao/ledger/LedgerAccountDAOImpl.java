@@ -1,17 +1,15 @@
 package my.generalledger.dao.ledger;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import my.generalledger.domain.ledger.LedgerAccount;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import my.generalledger.domain.ledger.LedgerAccount;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -37,16 +35,14 @@ public class LedgerAccountDAOImpl implements LedgerAccountDAO {
 	public LedgerAccount getAccountById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		logger.debug("retrieving ledger account by id: " + id);
-		LedgerAccount ledgerAccount = session.get(LedgerAccount.class, id);
-		return ledgerAccount;
+		return session.get(LedgerAccount.class, id);
 	}
 
 	@Override
 	public LedgerAccount getAccountByNumber(String number) {
 		Session session = sessionFactory.getCurrentSession();
 		logger.debug("retrieving ledger account by number: " + number);
-		LedgerAccount ledgerAccount = session.get(LedgerAccount.class, number);
-		return ledgerAccount;
+		return session.get(LedgerAccount.class, number);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -54,9 +50,8 @@ public class LedgerAccountDAOImpl implements LedgerAccountDAO {
 	public List<LedgerAccount> getAccounts() {
 		Session session = sessionFactory.getCurrentSession();
 		logger.debug("retrieving list of ledger accounts");
-		List<LedgerAccount> list = session.createSQLQuery("SELECT * FROM test.ledger_account")
+		return session.createSQLQuery("SELECT * FROM ledger_account")
 				.addEntity(LedgerAccount.class).list();
-		return list;
 	}
 
 	@Override
